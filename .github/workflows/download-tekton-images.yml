@@ -1,0 +1,38 @@
+name: Download Tekton Images 
+
+on: 
+  workflow_dispatch:  # 手动触发 
+
+jobs: 
+  download: 
+    runs-on: ubuntu-latest 
+    steps: 
+      - name: Login to ghcr.io 
+        uses: docker/login-action@v2 
+        with: 
+          registry: ghcr.io 
+          username: ${{ github.actor }} 
+          password: ${{ secrets.GITHUB_TOKEN }} 
+
+      - name: Pull and save images 
+        run: | 
+          # 创建目录 
+          mkdir -p images 
+          
+          # 下载 entrypoint 
+          docker pull ghcr.io/tektoncd/pipeline/entrypoint-bff0a22da108bc2f16c818c97641a296:v1.9.1 
+          docker save -o images/tekton-entrypoint-v1.9.1.tar ghcr.io/tektoncd/pipeline/entrypoint-bff0a22da108bc2f16c818c97641a296:v1.9.1 
+          
+          # 下载 nop 
+          docker pull ghcr.io/tektoncd/pipeline/nop-8eac7c1338c2bcce08f2c5169e89396b:v1.9.1 
+          docker save -o images/tekton-nop-v1.9.1.tar ghcr.io/tektoncd/pipeline/nop-8eac7c1338c2bcce08f2c5169e89396b:v1.9.1 
+          
+          # 下载 workingdirinit 
+          docker pull ghcr.io/tektoncd/pipeline/workingdirinit-4e2ea8797567bd513d00d1a3760e6018:v1.9.1 
+          docker save -o images/tekton-workingdirinit-v1.9.1.tar ghcr.io/tektoncd/pipeline/workingdirinit-4e2ea8797567bd513d00d1a3760e6018:v1.9.1 
+
+      - name: Upload artifacts 
+        uses: actions/upload-artifact@v3 
+        with: 
+          name: tekton-images 
+          path: images/*.tar
