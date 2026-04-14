@@ -18,11 +18,15 @@ jobs:
         run: |
           mkdir -p images
           
-          # 下载 nop (正确的名称)
+          # 下载 entrypoint
+          docker pull ghcr.io/tektoncd/pipeline/entrypoint-bff0a22da108bc2f16c818c97641a296:v1.9.1
+          docker save -o images/tekton-entrypoint-v1.9.1.tar ghcr.io/tektoncd/pipeline/entrypoint-bff0a22da108bc2f16c818c97641a296:v1.9.1
+          
+          # 下载 nop
           docker pull ghcr.io/tektoncd/pipeline/nop-8eac7c133edad5df719dc37b36b62482:v1.9.1
           docker save -o images/tekton-nop-v1.9.1.tar ghcr.io/tektoncd/pipeline/nop-8eac7c133edad5df719dc37b36b62482:v1.9.1
           
-          # 下载 workingdirinit (正确的名称)
+          # 下载 workingdirinit
           docker pull ghcr.io/tektoncd/pipeline/workingdirinit-0c558922ec6a1b739e550e349f2d5fc1:v1.9.1
           docker save -o images/tekton-workingdirinit-v1.9.1.tar ghcr.io/tektoncd/pipeline/workingdirinit-0c558922ec6a1b739e550e349f2d5fc1:v1.9.1
 
