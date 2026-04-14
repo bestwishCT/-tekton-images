@@ -18,13 +18,13 @@ jobs:
         run: |
           mkdir -p images
           
-          # 下载 nop
-          docker pull ghcr.io/tektoncd/pipeline/nop-8eac7c1338c2bcce08f2c5169e89396b:v1.9.1
-          docker save -o images/tekton-nop-v1.9.1.tar ghcr.io/tektoncd/pipeline/nop-8eac7c1338c2bcce08f2c5169e89396b:v1.9.1
+          # 下载 nop (正确的名称)
+          docker pull ghcr.io/tektoncd/pipeline/nop-8eac7c133edad5df719dc37b36b62482:v1.9.1
+          docker save -o images/tekton-nop-v1.9.1.tar ghcr.io/tektoncd/pipeline/nop-8eac7c133edad5df719dc37b36b62482:v1.9.1
           
-          # 下载 workingdirinit
-          docker pull ghcr.io/tektoncd/pipeline/workingdirinit-4e2ea8797567bd513d00d1a3760e6018:v1.9.1
-          docker save -o images/tekton-workingdirinit-v1.9.1.tar ghcr.io/tektoncd/pipeline/workingdirinit-4e2ea8797567bd513d00d1a3760e6018:v1.9.1
+          # 下载 workingdirinit (正确的名称)
+          docker pull ghcr.io/tektoncd/pipeline/workingdirinit-0c558922ec6a1b739e550e349f2d5fc1:v1.9.1
+          docker save -o images/tekton-workingdirinit-v1.9.1.tar ghcr.io/tektoncd/pipeline/workingdirinit-0c558922ec6a1b739e550e349f2d5fc1:v1.9.1
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
