@@ -18,10 +18,11 @@ jobs:
         run: |
           mkdir -p images
           
-          # 只需要下载这 2 个
+          # 下载 nop
           docker pull ghcr.io/tektoncd/pipeline/nop-8eac7c1338c2bcce08f2c5169e89396b:v1.9.1
           docker save -o images/tekton-nop-v1.9.1.tar ghcr.io/tektoncd/pipeline/nop-8eac7c1338c2bcce08f2c5169e89396b:v1.9.1
           
+          # 下载 workingdirinit
           docker pull ghcr.io/tektoncd/pipeline/workingdirinit-4e2ea8797567bd513d00d1a3760e6018:v1.9.1
           docker save -o images/tekton-workingdirinit-v1.9.1.tar ghcr.io/tektoncd/pipeline/workingdirinit-4e2ea8797567bd513d00d1a3760e6018:v1.9.1
 
