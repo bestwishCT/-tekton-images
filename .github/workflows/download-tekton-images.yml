@@ -18,9 +18,7 @@ jobs:
         run: |
           mkdir -p images
           
-          docker pull ghcr.io/tektoncd/pipeline/entrypoint-bff0a22da108bc2f16c818c97641a296:v1.9.1
-          docker save -o images/tekton-entrypoint-v1.9.1.tar ghcr.io/tektoncd/pipeline/entrypoint-bff0a22da108bc2f16c818c97641a296:v1.9.1
-          
+          # 只需要下载这 2 个
           docker pull ghcr.io/tektoncd/pipeline/nop-8eac7c1338c2bcce08f2c5169e89396b:v1.9.1
           docker save -o images/tekton-nop-v1.9.1.tar ghcr.io/tektoncd/pipeline/nop-8eac7c1338c2bcce08f2c5169e89396b:v1.9.1
           
