@@ -30,6 +30,15 @@ jobs:
           docker pull ghcr.io/tektoncd/pipeline/workingdirinit-0c558922ec6a1b739e550e349f2d5fc1:v1.9.1
           docker save -o images/tekton-workingdirinit-v1.9.1.tar ghcr.io/tektoncd/pipeline/workingdirinit-0c558922ec6a1b739e550e349f2d5fc1:v1.9.1
 
+          # lighthouse tekton controller
+          docker pull ghcr.io/jenkins-x/lighthouse-tekton-controller:1.29.0
+          docker save -o images/lighthouse-tekton-controller-1.29.0.tar ghcr.io/jenkins-x/lighthouse-tekton-controller:1.29.0
+
+          # alpine (used in pipeline steps)
+          docker pull alpine:3.18
+          docker save -o images/alpine-3.18.tar alpine:3.18
+
+
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
         with:
