@@ -38,9 +38,15 @@ jobs:
           docker pull alpine:3.18
           docker save -o images/alpine-3.18.tar alpine:3.18
 
-          # git-init (init container)
-          docker pull "ghcr.io/tektoncd/pipeline/cmd/git-init:v0.27.0"
-          docker save -o images/tekton-git-init-v0.27.0.tar "ghcr.io/tektoncd/pipeline/cmd/git-init:v0.27.0"
+                    # git-init (注意路径包含 github.com/tektoncd)
+          docker pull "ghcr.io/tektoncd/github.com/tektoncd/pipeline/cmd/git-init:v0.27.0@sha256:8bfb6edbd8ce4608af957a3a38444512c14713bc9fc0d60308f228c61be4c83f"
+          docker tag "ghcr.io/tektoncd/github.com/tektoncd/pipeline/cmd/git-init:v0.27.0@sha256:8bfb6edbd8ce4608af957a3a38444512c14713bc9fc0d60308f228c61be4c83f" git-init:v0.27.0
+          docker save -o images/tekton-git-init-v0.27.0.tar git-init:v0.27.0
+
+          # chainguard busybox
+          docker pull "cgr.dev/chainguard/busybox@sha256:19f02276bf8dbdd62f069b922f10c65262cc34b710eea26ff928129a736be791"
+          docker tag "cgr.dev/chainguard/busybox@sha256:19f02276bf8dbdd62f069b922f10c65262cc34b710eea26ff928129a736be791" chainguard-busybox:latest
+          docker save -o images/chainguard-busybox.tar chainguard-busybox:latest
 
           # jx-release-version
           docker pull ghcr.io/jenkins-x/jx-release-version:2.8.4
@@ -50,14 +56,15 @@ jobs:
           docker pull ghcr.io/jenkins-x/jx-boot:3.16.70
           docker save -o images/jx-boot-3.16.70.tar ghcr.io/jenkins-x/jx-boot:3.16.70
 
-          # golang build image
-          docker pull golang:1.24.4
+          # golang
+          docker pull "golang:1.24.4@sha256:d1db785fb37feb87d9140d78ed4fb7c75ee787360366a9c5efe39c7a841a0277"
+          docker tag "golang:1.24.4@sha256:d1db785fb37feb87d9140d78ed4fb7c75ee787360366a9c5efe39c7a841a0277" golang:1.24.4
           docker save -o images/golang-1.24.4.tar golang:1.24.4
 
           # jx-registry
           docker pull "ghcr.io/jenkins-x/jx-registry@sha256:ec0bfeb5a645951578db25341c6d01b729d4cdebfc3f625c85240f7f8d0a45d3"
-          docker tag "ghcr.io/jenkins-x/jx-registry@sha256:ec0bfeb5a645951578db25341c6d01b729d4cdebfc3f625c85240f7f8d0a45d3" ghcr.io/jenkins-x/jx-registry:latest
-          docker save -o images/jx-registry.tar ghcr.io/jenkins-x/jx-registry:latest
+          docker tag "ghcr.io/jenkins-x/jx-registry@sha256:ec0bfeb5a645951578db25341c6d01b729d4cdebfc3f625c85240f7f8d0a45d3" jx-registry:latest
+          docker save -o images/jx-registry.tar jx-registry:latest
 
           # kaniko executor
           docker pull gcr.io/kaniko-project/executor:v1.9.1-debug
