@@ -43,8 +43,8 @@ jobs:
           docker tag "ghcr.io/tektoncd/github.com/tektoncd/pipeline/cmd/git-init:v0.27.0@sha256:8bfb6edbd8ce4608af957a3a38444512c14713bc9fc0d60308f228c61be4c83f" git-init:v0.27.0
           docker save -o images/tekton-git-init-v0.27.0.tar git-init:v0.27.0
 
-          # chainguard busybox
-          docker pull "cgr.dev/chainguard/busybox@sha256:19f02276bf8dbdd62f069b922f10c65262cc34b710eea26ff928129a736be791"
+          # chainguard busybox (需要指定 platform)
+          docker pull --platform linux/amd64 "cgr.dev/chainguard/busybox@sha256:19f02276bf8dbdd62f069b922f10c65262cc34b710eea26ff928129a736be791"
           docker tag "cgr.dev/chainguard/busybox@sha256:19f02276bf8dbdd62f069b922f10c65262cc34b710eea26ff928129a736be791" chainguard-busybox:latest
           docker save -o images/chainguard-busybox.tar chainguard-busybox:latest
 
