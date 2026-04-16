@@ -38,6 +38,34 @@ jobs:
           docker pull alpine:3.18
           docker save -o images/alpine-3.18.tar alpine:3.18
 
+          # git-init (init container)
+          docker pull "ghcr.io/tektoncd/pipeline/cmd/git-init:v0.27.0"
+          docker save -o images/tekton-git-init-v0.27.0.tar "ghcr.io/tektoncd/pipeline/cmd/git-init:v0.27.0"
+
+          # jx-release-version
+          docker pull ghcr.io/jenkins-x/jx-release-version:2.8.4
+          docker save -o images/jx-release-version-2.8.4.tar ghcr.io/jenkins-x/jx-release-version:2.8.4
+
+          # jx-boot
+          docker pull ghcr.io/jenkins-x/jx-boot:3.16.70
+          docker save -o images/jx-boot-3.16.70.tar ghcr.io/jenkins-x/jx-boot:3.16.70
+
+          # golang build image
+          docker pull golang:1.24.4
+          docker save -o images/golang-1.24.4.tar golang:1.24.4
+
+          # jx-registry
+          docker pull "ghcr.io/jenkins-x/jx-registry@sha256:ec0bfeb5a645951578db25341c6d01b729d4cdebfc3f625c85240f7f8d0a45d3"
+          docker tag "ghcr.io/jenkins-x/jx-registry@sha256:ec0bfeb5a645951578db25341c6d01b729d4cdebfc3f625c85240f7f8d0a45d3" ghcr.io/jenkins-x/jx-registry:latest
+          docker save -o images/jx-registry.tar ghcr.io/jenkins-x/jx-registry:latest
+
+          # kaniko executor
+          docker pull gcr.io/kaniko-project/executor:v1.9.1-debug
+          docker save -o images/kaniko-executor-v1.9.1-debug.tar gcr.io/kaniko-project/executor:v1.9.1-debug
+
+          # jx-promote
+          docker pull ghcr.io/jenkins-x-plugins/jx-promote:0.6.39
+          docker save -o images/jx-promote-0.6.39.tar ghcr.io/jenkins-x-plugins/jx-promote:0.6.39
 
       - name: Upload artifacts
         uses: actions/upload-artifact@v4
